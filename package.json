@@ -5,7 +5,8 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "mod": "jscodeshift -t mods/v7-v8/transform-hook-signature.ts files-to-mod"
+    "mod": "jscodeshift --parser flow -t mods/v7-v8/index.ts files-to-mod",
+    "debug": "node --inspect ./node_modules/.bin/jscodeshift --parser flow --run-in-band -t mods/v7-v8/index.ts files-to-mod"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
