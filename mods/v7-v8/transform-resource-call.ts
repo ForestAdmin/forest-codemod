@@ -1,4 +1,5 @@
 import { API, FileInfo, Identifier, Collection, JSCodeshift } from 'jscodeshift';
+
 const callIdentifiers = [
   'RecordsGetter',
   'RecordsGetter',

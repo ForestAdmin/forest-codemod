@@ -1,7 +1,7 @@
 {
   "name": "fa-codemod",
   "version": "1.0.0",
-  "description": "ForestAdmin codemode for agent v2 migration",
+  "description": "ForestAdmin codemode for agent migration",
   "main": "index.ts",
   "license": "MIT",
   "scripts": {

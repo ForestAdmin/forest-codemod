@@ -1,7 +1,6 @@
-import { ExpressionKind } from 'ast-types/gen/kinds';
-import { API, FileInfo, Collection, JSCodeshift, Identifier, CallExpression } from 'jscodeshift';
+import { API, FileInfo, Collection, JSCodeshift, Identifier, CallExpression, BinaryExpression } from 'jscodeshift';
 
-function getFindCallExpression(j: JSCodeshift, fieldName: ExpressionKind): CallExpression {
+function getFindCallExpression(j: JSCodeshift, fieldName: BinaryExpression['right']): CallExpression {
   return j.callExpression(
     j.memberExpression(
       j.identifier('fields'),
