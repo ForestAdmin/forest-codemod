@@ -7,8 +7,8 @@ import hookSignatureRecord from "./transform-hook-signature-record";
 
 export default runTransforms([
   cors,
-  resourceCall,
   hookNaming,
   hookSignatureFields,
   hookSignatureRecord,
+  resourceCall,
 ]);
