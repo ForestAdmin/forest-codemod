@@ -32,7 +32,7 @@ function extractFields(collectionCalls: Collection, j: JSCodeshift) {
   return a;
 }
 
-export default function(fileInfo: FileInfo, api: API, options: Options) {
+export default function(fileInfo: FileInfo, api: API): string {
   const { j } = api;
   const root = j(fileInfo.source);
   const collectionCalls = root.find(j.CallExpression, { callee: { name: 'collection' } });
