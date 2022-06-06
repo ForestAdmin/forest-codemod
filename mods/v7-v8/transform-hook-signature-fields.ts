@@ -1,23 +1,7 @@
 import { API, FileInfo, Collection, JSCodeshift, Identifier, CallExpression, BinaryExpression } from 'jscodeshift';
 
 function getFindCallExpression(j: JSCodeshift, fieldName: BinaryExpression['right']): CallExpression {
-  return j.callExpression(
-    j.memberExpression(
-      j.identifier('fields'),
-      j.identifier('find')
-    ),
-    [j.arrowFunctionExpression(
-      [j.identifier('field')],
-      j.binaryExpression(
-        '===',
-        j.memberExpression(
-          j.identifier('field'),
-          j.identifier('field'),
-        ),
-        fieldName,
-      ),
-    )],
-  );
+  return j.template.expression`fields.find(field => field.field === ${fieldName});`;
 }
 
 function replaceObjectAssignDeclaration(j: JSCodeshift, hookObjects: Collection): void {
