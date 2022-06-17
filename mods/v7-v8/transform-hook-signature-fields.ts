@@ -41,6 +41,10 @@ function replaceFieldsCall(j: JSCodeshift, hookObjects: Collection): void {
     });
 }
 
+/**
+ * Deals with the following breaking change:
+ * https://docs.forestadmin.com/documentation/how-tos/maintain/upgrade-notes-sql-mongodb/upgrade-to-v8#smart-actions
+ */
 export default function(fileInfo: FileInfo, api: API): string {
   const { j } = api;
   const root = j(fileInfo.source);

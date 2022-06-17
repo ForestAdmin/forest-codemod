@@ -32,6 +32,10 @@ function fixCall(j: JSCodeshift, root: Collection, callIdentifier: string): void
   addArgument(j, callIdentifier, arrowFunctions);
 }
 
+/**
+ * Deals with the following breaking change:
+ * https://docs.forestadmin.com/documentation/how-tos/maintain/upgrade-notes-sql-mongodb/upgrade-to-v8#scopes
+ */
 export default function(fileInfo: FileInfo, api: API): string {
   const { j } = api;
   const root = j(fileInfo.source);

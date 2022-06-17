@@ -51,7 +51,7 @@ function addRecordVar(j:JSCodeshift, hooksUsingRecord: Collection<ArrowFunctionE
       j.identifier('record'),
       j.awaitExpression(
         j.callExpression(
-          j.identifier('getRecordFromRequestFunction'),
+          j.identifier('getRecordFromRequest'),
           [j.identifier('request')],
         ),
       ),
@@ -68,6 +68,10 @@ function passHookToAsync(hooksUsingRecord: Collection<ArrowFunctionExpression>) 
   hooksUsingRecord.nodes().forEach(hookUsingRecord => hookUsingRecord.async = true);
 }
 
+/**
+ * Deals with the following breaking change:
+ * https://docs.forestadmin.com/documentation/how-tos/maintain/upgrade-notes-sql-mongodb/upgrade-to-v8#smart-actions
+ */
 export default function(fileInfo: FileInfo, api: API): string {
   const { j } = api;
   const root = j(fileInfo.source);
@@ -79,14 +83,14 @@ export default function(fileInfo: FileInfo, api: API): string {
 
   const hooksUsingRecord = root.find(j.Identifier, { name: 'record' }).closest(j.ArrowFunctionExpression);
   if(!hooksUsingRecord.length) return root.toSource();
-  
-  replaceRecordArgs(j, hooksUsingRecord);
-  addRecordVar(j, hooksUsingRecord);
-  passHookToAsync(hooksUsingRecord);
 
   const programBody: Program['body'] = program.get('body').value;
 
   if(!hasRecordFromRequestFunction(programBody)) {
+    replaceRecordArgs(j, hooksUsingRecord);
+    addRecordVar(j, hooksUsingRecord);
+    passHookToAsync(hooksUsingRecord);
+
     const modelName: string = collectionCall.get('arguments').value[0].value;
     const camel = modelName.charAt(0).toUpperCase() + modelName.slice(1);
     programBody.splice(programBody.length - 1, 0, getRecordFromRequestFunction(j, camel));
