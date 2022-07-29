@@ -9,6 +9,11 @@
     "declarationMap": true,
     "inlineSourceMap": true,
     "noImplicitOverride": true,
-    "stripInternal": true
+    "stripInternal": true,
+    "outDir": "dist",
+    "rootDir": "src",
   },
+  "include": [
+    "src/**/*"
+  ]
 }
