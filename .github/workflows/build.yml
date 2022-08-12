@@ -1,0 +1,19 @@
+name: Build and publish
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    name: Release Command line
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.17.6
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --non-interactive
+      - name: Build package
+        run: yarn build
+      
