@@ -1,11 +1,11 @@
 {
-  "name": "fa-codemod",
+  "name": "forest-codemod",
   "version": "1.0.0",
   "description": "ForestAdmin codemode for agent migration",
   "main": "index.ts",
   "license": "MIT",
   "bin": {
-    "fa-codemod": "./bin/run"
+    "forest-codemod": "./bin/run"
   },
   "scripts": {
     "mod": "jscodeshift --parser flow -t src/mods/index.ts files-to-mod",
@@ -30,8 +30,8 @@
     "oclif": "^3"
   },
   "oclif": {
-    "bin": "fa-codemod",
-    "dirname": "fa-codemod",
+    "bin": "forest-codemod",
+    "dirname": "forest-codemod",
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
