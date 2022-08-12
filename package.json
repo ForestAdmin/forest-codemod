@@ -10,7 +10,7 @@
   "files": ["dist"],
   "scripts": {
     "mod": "jscodeshift --parser flow -t src/mods/index.ts files-to-mod",
-    "debug": "node --inspect ./node_modules/.bin/jscodeshift --parser flow --run-in-band -t src/mods/v7-v8/index.ts files-to-mod",
+    "debug": "node --inspect ./node_modules/.bin/jscodeshift --parser flow --run-in-band -t src/mods/index.ts files-to-mod",
     "build": "rm -rf dist && tsc -b",
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "yarn build"

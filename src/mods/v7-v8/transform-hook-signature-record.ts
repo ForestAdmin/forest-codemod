@@ -1,6 +1,7 @@
 import {
   API,
   ArrowFunctionExpression,
+  BlockStatement,
   Collection,
   FileInfo,
   Identifier,
@@ -44,24 +45,38 @@ function replaceRecordArgs(j: JSCodeshift, hooksUsingRecord: Collection<ArrowFun
     .replaceWith(identifier);
 }
 
-function addRecordVar(j:JSCodeshift, hooksUsingRecord: Collection<ArrowFunctionExpression>) {
-  const recordVar = j.variableDeclaration(
+function getRecordVar(j: JSCodeshift, prefix?: string) {
+  let identifier = 'request';
+  if (prefix) identifier = `${prefix}.${identifier}`;
+
+  return j.variableDeclaration(
     'const', 
     [j.variableDeclarator(
       j.identifier('record'),
       j.awaitExpression(
         j.callExpression(
           j.identifier('getRecordFromRequest'),
-          [j.identifier('request')],
+          [j.identifier(identifier)],
         ),
       ),
     )],
   );
-  
-  hooksUsingRecord
-    .find(j.BlockStatement)
-    .nodes()
-    .forEach(hookUsingRecord => hookUsingRecord.body.splice(0, 0, recordVar));
+}
+
+function addRecordVar(j:JSCodeshift, hooksUsingRecord: Collection<ArrowFunctionExpression>) {
+  hooksUsingRecord.forEach((hookUsingRecord) => {
+    const functionParams = hookUsingRecord.node.params[0];
+    const isNotDestructuring = functionParams.type === 'Identifier';
+    const recordVar = isNotDestructuring ? getRecordVar(j, functionParams.name) : getRecordVar(j);
+
+    if (isNotDestructuring) {
+      j(hookUsingRecord)
+        .find(j.MemberExpression, { object: { name: functionParams.name }, property: { name: 'record' } })
+        .replaceWith(j.identifier('record'));
+    }
+
+    (hookUsingRecord.node.body as BlockStatement).body.splice(0, 0, recordVar);
+  });
 }
 
 function passHookToAsync(hooksUsingRecord: Collection<ArrowFunctionExpression>) {

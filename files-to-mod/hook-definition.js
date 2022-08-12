@@ -30,12 +30,12 @@ collection('owner', {
           const field2 = fields.blbl;
           field2.value = record.aProps;
           return fields;
-        }
+        },
       }
     }
   }, {
     type: 'single',
-    name: 'test',
+    name: 'test2',
     hooks: {
       load: ({ fields, record }) => {
         const field = fields['a field'];
@@ -49,11 +49,34 @@ collection('owner', {
         onFieldChanged: ({ fields }) => {
           const field = fields['a field'];
           field.value = 'what you want';
+          fields["nom"].value = "load value";
           return fields;
         }
       }
     }
-  }],
+  }, {
+    type: 'single',
+    name: 'test3',
+    hooks: {
+      load: (prop) => {
+        prop.fields["nom"].value = prop.record.aProps;
+        return prop.fields;
+      },
+      change: {
+        onOtherFieldChange: context => {
+          const { plop } = context.fields;
+          plop.value = 'ici';
+          if (context.fields["nom"].value.length > 4) {
+            //do something
+          }
+
+          context.fields["nom"].value = context.record.aProps;
+
+          return context.fields;
+        }
+      }
+    }
+}],
   fields: [],
   segments: [],
 });
