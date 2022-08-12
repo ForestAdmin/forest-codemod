@@ -1,18 +1,19 @@
 {
-  "name": "forest-codemod",
-  "version": "1.0.0",
+  "name": "am-forest-codemod",
+  "version": "1.0.1",
   "description": "ForestAdmin codemode for agent migration",
   "main": "index.ts",
   "license": "MIT",
   "bin": {
     "forest-codemod": "./bin/run"
   },
+  "files": ["dist"],
   "scripts": {
     "mod": "jscodeshift --parser flow -t src/mods/index.ts files-to-mod",
     "debug": "node --inspect ./node_modules/.bin/jscodeshift --parser flow --run-in-band -t src/mods/v7-v8/index.ts files-to-mod",
     "build": "rm -rf dist && tsc -b",
     "postpack": "rm -f oclif.manifest.json",
-    "prepack": "yarn build && oclif manifest && oclif readme"
+    "prepack": "yarn build"
   },
   "dependencies": {
     "@oclif/core": "^1",

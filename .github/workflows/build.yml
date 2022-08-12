@@ -14,6 +14,6 @@ jobs:
           node-version: 14.17.6
       - name: Install dependencies
         run: yarn install --frozen-lockfile --non-interactive
-      - name: Build package
-        run: yarn build
+      - name: Publish to npm
+        run: echo 'to change with the real command'
       
