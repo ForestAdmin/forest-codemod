@@ -3,7 +3,7 @@
   "version": "1.0.0-beta.1",
   "description": "ForestAdmin codemode for agent migration",
   "main": "index.ts",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bin": {
     "forest-codemod": "./bin/run"
   },
