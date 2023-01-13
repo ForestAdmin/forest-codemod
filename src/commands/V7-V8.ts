@@ -4,7 +4,7 @@ import { Command } from '@oclif/core'
 import { run } from 'jscodeshift/src/Runner';
 
 export default class V7toV8 extends Command {
-  static override description = 'Migrate your v7 agent to V8';
+  static override description = 'Migrate your V7 agent to V8';
   static excludedFolderToExtract = ['node_modules'];
 
   extractFiles(folderPath: string): String[] {
