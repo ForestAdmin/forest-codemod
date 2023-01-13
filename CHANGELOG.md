@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/ForestAdmin/forest-codemod/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* license ([1690ff2](https://github.com/ForestAdmin/forest-codemod/commit/1690ff223b9877b2aea30060a3673289bae242b6))
+
 # 1.0.0-beta.1 (2023-01-13)
 
 
