@@ -14,8 +14,6 @@ jobs:
           node-version: 14.17.6
       - name: Install dependencies
         run: yarn install --frozen-lockfile --non-interactive
-      - name: Publish to npm
-        run: echo 'to change with the real command'
       - name: Get Semantic Release current version
         id: semantic_version
         run: |
