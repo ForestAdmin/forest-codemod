@@ -1,6 +1,6 @@
 {
   "name": "forest-codemod",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "ForestAdmin codemode for agent migration",
   "main": "index.ts",
   "license": "MIT",
