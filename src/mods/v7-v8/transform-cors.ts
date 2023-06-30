@@ -27,24 +27,6 @@ export default function (fileInfo: FileInfo, api: API): string {
       exp.elements.push(j.stringLiteral("Forest-Context-Url"))
     });
 
-    // console.log(a);
-    // // get Array
-    // .map<ArrayExpression>((path) => path.get("value"))
-
-    // // Ignore those which already have the header
-    // .filter((path) =>
-    //   path.node.elements.every(
-    //     (node) =>
-    //       node.type === "StringLiteral" &&
-    //       node.value.toLowerCase() !== "forest-context-url"
-    //   )
-    // )
-
-    // // Add the header
-    // .forEach((path) =>
-    //   path.node.elements.unshift(j.stringLiteral("Forest-Context-Url"))
-    // );
-
   return rootSource.toSource();
 }
 
