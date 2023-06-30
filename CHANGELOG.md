@@ -1,3 +1,10 @@
+# [1.0.0-beta.3](https://github.com/ForestAdmin/forest-codemod/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2023-06-30)
+
+
+### Bug Fixes
+
+* **v7-v8:** improve allowed header mod ([f61a03d](https://github.com/ForestAdmin/forest-codemod/commit/f61a03d83ecdcf92ecdf44dadcb4c71189aceb95))
+
 # [1.0.0-beta.2](https://github.com/ForestAdmin/forest-codemod/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2023-01-13)
 
 
