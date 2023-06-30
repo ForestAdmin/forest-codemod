@@ -1,8 +1,18 @@
 const { collection } = require('forest-express-sequelize');
 
+const {
+  Owner
+} = require('../models');
+
 function hook (record) {
   const a = record.aProps;
   return a;
+}
+
+async function getRecordFromRequest(request) {
+  const [id] = request.body.data.attributes.ids;
+      
+  return Owner.findByPk(id);
 }
 
 // This file allows you to add to your Forest UI:
@@ -15,19 +25,21 @@ collection('owner', {
     type: 'single',
     name: 'test',
     hooks: {
-      load: ({ fields, record }) => {
+      load: async ({ fields, request }) => {
+        const record = await getRecordFromRequest(request);
         const name = 'a field';
-        const field = fields[name];
+        const field = fields.find(field => field.field === name);
         field.value = 'init your field';
-        fields.action.value = 'ici';
+        fields.find(field => field.field === "action").value = 'ici';
         field.value = hook(record);
         return fields;
       },
       change: {
-        onFieldChanged: ({ fields, record }) => {
-          const field = fields['a field'];
+        hook_0: async ({ fields, request }) => {
+          const record = await getRecordFromRequest(request);
+          const field = fields.find(field => field.field === 'a field');
           field.value = 'what you want';
-          const field2 = fields.blbl;
+          const field2 = fields.find(field => field.field === "blbl");
           field2.value = record.aProps;
           return fields;
         },
@@ -37,19 +49,21 @@ collection('owner', {
     type: 'single',
     name: 'test2',
     hooks: {
-      load: ({ fields, record }) => {
-        const field = fields['a field'];
+      load: async ({ fields, request }) => {
+        const record = await getRecordFromRequest(request);
+        const field = fields.find(field => field.field === 'a field');
         field.value = 'init your field';
-        const { tata, toto } = fields;
+        const toto = fields.find(field => field.field === "toto");
+        const tata = fields.find(field => field.field === "tata");
         tata.value = record.aProps;
         toto.value = record.anotherProps;
         return fields;
       },
       change: {
-        onFieldChanged: ({ fields }) => {
-          const field = fields['a field'];
+        hook_0: ({ fields }) => {
+          const field = fields.find(field => field.field === 'a field');
           field.value = 'what you want';
-          fields["nom"].value = "load value";
+          fields.find(field => field.field === "nom").value = "load value";
           return fields;
         }
       }
@@ -58,19 +72,21 @@ collection('owner', {
     type: 'single',
     name: 'test3',
     hooks: {
-      load: (prop) => {
-        prop.fields["nom"].value = prop.record.aProps;
+      load: async prop => {
+        const record = await getRecordFromRequest(prop.request);
+        prop.fields.find(field => field.field === "nom").value = record.aProps;
         return prop.fields;
       },
       change: {
-        onOtherFieldChange: context => {
-          const { plop } = context.fields;
+        hook_0: async context => {
+          const record = await getRecordFromRequest(context.request);
+          const plop = context.fields.find(field => field.field === "plop");
           plop.value = 'ici';
-          if (context.fields["nom"].value.length > 4) {
+          if (context.fields.find(field => field.field === "nom").value.length > 4) {
             //do something
           }
 
-          context.fields["nom"].value = context.record.aProps;
+          context.fields.find(field => field.field === "nom").value = record.aProps;
 
           return context.fields;
         }

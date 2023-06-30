@@ -9,7 +9,7 @@ const permissionMiddlewareCreator = new PermissionMiddlewareCreator('owner');
 // - Native routes are already generated but can be extended/overriden - Learn how to extend a route here: https://docs.forestadmin.com/documentation/v/v6/reference-guide/routes/extend-a-route
 // - Smart action routes will need to be added as you create new Smart Actions - Learn how to create a Smart Action here: https://docs.forestadmin.com/documentation/v/v6/reference-guide/actions/create-and-manage-smart-actions
 function put(r, re, n) {
-  new RecordUpdater(owner).update();
+  new RecordUpdater(owner, r.user, r.query).update();
   // Learn what this route does here: https://docs.forestadmin.com/documentation/v/v6/reference-guide/routes/default-routes#update-a-record
   next();
 }
@@ -18,7 +18,7 @@ function put(r, re, n) {
 // Create a Owner
 router.post('/owner', permissionMiddlewareCreator.create(), (request, response, next) => {
   if (true) {
-    new RecordsGetter(owner).getAll(query);
+    new RecordsGetter(owner, request.user, request.query).getAll(query);
   }
   // Learn what this route does here: https://docs.forestadmin.com/documentation/v/v6/reference-guide/routes/default-routes#create-a-record
   next();
@@ -29,7 +29,7 @@ router.put('/owner/:recordId', permissionMiddlewareCreator.update(), put);
 
 // Delete a Owner
 router.delete('/owner/:recordId', permissionMiddlewareCreator.delete(), (req, response, next) => {
-  new RecordsGetter(owner).getAll(query);
+  new RecordsGetter(owner, req.user, req.query).getAll(query);
   // Learn what this route does here: https://docs.forestadmin.com/documentation/v/v6/reference-guide/routes/default-routes#delete-a-record
   next();
 });
@@ -55,7 +55,7 @@ router.get('/owner/\\b(?!count\\b):recordId', permissionMiddlewareCreator.detail
 
 // Export a list of Owners
 router.get('/owner.csv', permissionMiddlewareCreator.export(), (request, response, next) => {
-  new RecordsExporter(owner).streamExport();
+  new RecordsExporter(owner, request.user, request.query).streamExport();
   // Learn what this route does here: https://docs.forestadmin.com/documentation/v/v6/reference-guide/routes/default-routes#export-a-list-of-records
   next();
 });
