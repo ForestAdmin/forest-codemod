@@ -1,3 +1,10 @@
+# [1.0.0-beta.4](https://github.com/ForestAdmin/forest-codemod/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2023-07-04)
+
+
+### Bug Fixes
+
+* **v7-v8:** fix error on hook record usage ([15d5d9d](https://github.com/ForestAdmin/forest-codemod/commit/15d5d9d11c9f674ce8aee2723894b5e68ddd7393))
+
 # [1.0.0-beta.3](https://github.com/ForestAdmin/forest-codemod/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2023-06-30)
 
 
