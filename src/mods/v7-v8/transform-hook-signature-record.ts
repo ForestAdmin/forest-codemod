@@ -75,7 +75,7 @@ function addRecordVar(j:JSCodeshift, hooksUsingRecord: Collection<ArrowFunctionE
         .replaceWith(j.identifier('record'));
     }
 
-    (hookUsingRecord.node.body as BlockStatement).body.splice(0, 0, recordVar);
+    (hookUsingRecord.node.body as BlockStatement).body?.splice(0, 0, recordVar);
   });
 }
 

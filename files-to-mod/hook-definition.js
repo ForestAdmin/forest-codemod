@@ -76,6 +76,12 @@ collection('owner', {
         }
       }
     }
+}, {
+  type: 'single',
+  name: 'test3',
+  hooks: {
+    load: ({ fields, record }) => fields
+  }
 }],
   fields: [],
   segments: [],
